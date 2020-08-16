@@ -1,6 +1,6 @@
 # Fennel Language Support for Sublime Text 3 & 4
 
-> _Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system. [fennel-lang.org](https://fennel-lang.org)_
+> _"Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system." [fennel-lang.org](https://fennel-lang.org)_
 
 Heavily tested against [Fennel 0.5.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_fennel_reference.fnl) and [Lua 5.4.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_lua.fnl) specifications.
 
