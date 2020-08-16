@@ -87,7 +87,7 @@ contexts:
       push: pop-string-tail
     - match: \#
       scope: entity.name.tag.literal_shorthand.fennel
-    - match: '[^:\s](\#)'
+    - match: '[^:\s"](\#)'
       captures:
         1: storage.type.auto_gensym.fennel
     - match: '{{lua_variables}}|{{lua_functions}}'
@@ -307,7 +307,7 @@ contexts:
         - match: \[
           scope: punctuation.section.brackets.begin.fennel
           set: pop-let-first-block
-        - match: .(\#)
+        - match: '[^:\s"](\#)'
           captures:
             1: storage.type.auto_gensym.fennel
         - match: ','
@@ -320,7 +320,7 @@ contexts:
     - include: match-expr
 
   pop-let-first-block:
-    - match: .(\#)
+    - match: '[^:\s"](\#)'
       captures:
         1: storage.type.auto_gensym.fennel
     - match: ','
@@ -334,7 +334,7 @@ contexts:
     - include: bind-operators
 
   pop-let-list-tail:
-    - match: .(\#)
+    - match: '[^:\s"](\#)'
       captures:
         1: storage.type.auto_gensym.fennel
     - match: ','

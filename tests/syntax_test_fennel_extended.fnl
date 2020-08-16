@@ -245,3 +245,15 @@
 ;      ^ punctuation.definition.numeric.sign.fennel
 ;       ^^ constant.numeric.integer.decimal.fennel
 ;         ^ punctuation.section.parens.end.fennel
+
+(let [hex "#34a2eb"] true)
+; <- punctuation.section.parens.begin.fennel
+;^^^ entity.name.tag.let.fennel
+;    ^ punctuation.section.brackets.begin.fennel
+;     ^^^ source.fennel
+;         ^ punctuation.definition.string.begin.fennel
+;          ^^^^^^^ string.quoted.double.fennel
+;                 ^ punctuation.definition.string.end.fennel
+;                  ^ punctuation.section.brackets.end.fennel
+;                    ^^^^ constant.language.fennel
+;                        ^ punctuation.section.parens.end.fennel
