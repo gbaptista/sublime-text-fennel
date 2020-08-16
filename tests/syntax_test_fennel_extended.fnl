@@ -1,4 +1,4 @@
-; SYNTAX TEST "Packages/User/Fennel/Fennel.sublime-syntax"
+; SYNTAX TEST "Packages/Fennel/Fennel.sublime-syntax"
 
 ; Fennel 0.5.0 on Lua 5.4.0
 
@@ -235,3 +235,13 @@
 ;^^^^ entity.name.tag.fennel_threading_macros.fennel
 ;     ^ constant.numeric.integer.decimal.fennel
 ;      ^ punctuation.section.parens.end.fennel
+
+
+(+ -14 -15)
+; <- punctuation.section.parens.begin.fennel
+;^ entity.name.tag.lua_support.fennel
+;  ^ punctuation.definition.numeric.sign.fennel
+;   ^^ constant.numeric.integer.decimal.fennel
+;      ^ punctuation.definition.numeric.sign.fennel
+;       ^^ constant.numeric.integer.decimal.fennel
+;         ^ punctuation.section.parens.end.fennel
