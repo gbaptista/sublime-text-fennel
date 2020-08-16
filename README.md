@@ -44,7 +44,7 @@ One hundred ninety-four completions are available for _Fennel 0.5.0_ and _Lua 5.
 
 ## Acknowledgments
 
-This package used the [_Clojure Package_](https://github.com/sublimehq/Packages/tree/master/Clojure) as an initial reference.
+The [_Clojure Package_](https://github.com/sublimehq/Packages/tree/master/Clojure) inspired this package.
 
 ## References
 - [Fennel Language Website](https://fennel-lang.org)
