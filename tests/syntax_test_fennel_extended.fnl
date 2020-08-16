@@ -1,4 +1,4 @@
-; SYNTAX TEST "Packages/Fennel/Package/Fennel.sublime-syntax"
+; SYNTAX TEST "Fennel.sublime-syntax"
 
 ; Fennel 0.5.0 on Lua 5.4.0
 
