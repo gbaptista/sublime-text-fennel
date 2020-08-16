@@ -167,9 +167,6 @@ contexts:
     - match: '"'
       scope: punctuation.definition.string.begin.fennel
       set: pop-string-tail
-    - match: '#'
-      scope: keyword.operator.macro.fennel.C
-      set: pop-dispatch-expr
     - match: '''|`|~|@'
       scope: keyword.operator.macro.fennel.D
       set: pop-expr
@@ -235,56 +232,6 @@ contexts:
         1: punctuation.definition.comment
     - match: ','
       scope: entity.other.inherited-class.macro.punctuation.comma.fennel
-    # - match: \^
-    #   scope: keyword.operator.macro.fennel.E
-    #   push: pop-expr
-
-  pop-dispatch-expr:
-    - match: (?=\s)
-      set: pop-dispatch-tag-expr
-    - match: _
-      scope: keyword.operator.macro.fennel.F
-      set: pop-expr
-    - match: '#'
-      scope: keyword.operator.macro.fennel.G
-      set: pop-symbolic-value
-    - match: "'"
-      scope: keyword.operator.macro.fennel.H
-      pop: true
-    - match: '"'
-      scope: punctuation.definition.string.begin.fennel
-      set: pop-regexp-tail
-    - match: (?=[\^:])
-      pop: true
-    - match: (?=\S)
-      set: pop-dispatch-tag-expr
-
-  pop-dispatch-tag-expr:
-    - include: match-noise
-    - match: '{{symbol}}'
-      scope: keyword.operator.macro.fennel.I
-      pop: true
-    - match: (?=\S)
-      set: pop-expr
-
-  pop-symbolic-value:
-    - include: match-noise
-    - match: '{{atom}}'
-      scope: constant.other.symbolic.fennel
-      pop: true
-    - match: (?=\S)
-      set: pop-expr
-
-  pop-regexp-tail:
-    - meta_scope: string.regexp.fennel
-    - match: '"'
-      scope: punctuation.definition.string.end.fennel
-      pop: true
-    - match: ''
-      push: scope:source.regexp#base-literal
-      with_prototype:
-        - match: (?=")
-          pop: true
 
   pop-string-tail:
     - meta_scope: string.quoted.double.fennel
@@ -296,24 +243,6 @@ contexts:
 
   pop-list-head:
     - include: match-noise
-    - match: defprotocol[^{{non_symbol_chars}}]*
-      scope: storage.type.fennel
-      set: pop-declare-protocol-list-tail
-    - match: definterface[^{{non_symbol_chars}}]*
-      scope: storage.type.fennel
-      set: pop-declare-interface-list-tail
-    - match: (?:deftype|defrecord)[^{{non_symbol_chars}}]*
-      scope: storage.type.fennel
-      set: pop-declare-type-list-tail
-    - match: defmethod[^{{non_symbol_chars}}]*
-      scope: storage.modifier.def.fennel
-      set: pop-fn-list-tail
-    - match: def[^{{non_symbol_chars}}]*
-      scope: storage.modifier.def.fennel
-      set: pop-declare-def-list-tail
-    - match: (?:reify|proxy|extend-protocol|extend-type)[^{{non_symbol_chars}}]*
-      scope: variable.function.fennel
-      set: pop-type-list-tail
     - match: (fn|lambda|λ)\*?(?=[{{non_symbol_chars}}])
       scope: storage.modifier.fn.fennel
       set: pop-fn-list-tail
@@ -323,9 +252,6 @@ contexts:
     - match: (local|global)\*?(?=[{{non_symbol_chars}}])
       scope: entity.name.tag.binding.fennel
       set: pop-binding-list-head
-    - match: declare[^{{non_symbol_chars}}]*
-      scope: storage.modifier.declare.fennel
-      set: pop-declare-list-tail
     - match: (?=\S)
       set: pop-invoke-list-tail
 
@@ -334,62 +260,6 @@ contexts:
       scope: punctuation.section.parens.end.fennel
       pop: true
     - include: match-expr
-
-  pop-declare-protocol-list-tail:
-    - include: match-constant-set-normal-list-tail
-    - match: '{{symbol}}'
-      scope: entity.name.type.fennel
-      set: pop-protocol-list-tail
-    - include: set-normal-list-tail
-
-  pop-protocol-list-tail:
-    - match: \)
-      scope: punctuation.section.parens.end.fennel
-      pop: true
-    - match: \(
-      scope: punctuation.section.parens.begin.fennel
-      push: pop-declare-def-list-tail
-    - include: match-expr
-
-  pop-declare-interface-list-tail:
-    - include: match-constant-set-normal-list-tail
-    - match: '{{symbol}}'
-      scope: entity.name.type.fennel
-      set: pop-interface-list-tail
-    - include: set-normal-list-tail
-
-  pop-interface-list-tail:
-    - match: \)
-      scope: punctuation.section.parens.end.fennel
-      pop: true
-    - match: \(
-      scope: punctuation.section.parens.begin.fennel
-      push: pop-fn-list-tail
-    - include: match-expr
-
-  pop-declare-type-list-tail:
-    - include: match-constant-set-normal-list-tail
-    - match: '{{symbol}}'
-      scope: entity.name.type.fennel
-      set: pop-type-list-tail
-    - include: set-normal-list-tail
-
-  pop-type-list-tail:
-    - match: \)
-      scope: punctuation.section.parens.end.fennel
-      pop: true
-    - match: \(
-      scope: punctuation.section.parens.begin.fennel
-      push: pop-fn-list-tail
-    - include: match-symbol-implemented-or-extended
-    - include: match-expr
-
-  pop-declare-def-list-tail:
-    - include: match-constant-set-normal-list-tail
-    - match: '{{symbol}}'
-      scope: entity.name.function.fennel
-      set: pop-list-tail
-    - include: set-normal-list-tail
 
   pop-fn-list-tail:
     - include: match-constant-set-normal-list-tail
@@ -480,13 +350,6 @@ contexts:
   bind-operators:
     - match: '\s(:|&)\s'
       scope: keyword.operator.bind.fennel
-
-  pop-declare-list-tail:
-    - include: match-constant-set-normal-list-tail
-    - match: '{{symbol}}'
-      scope: entity.name.function.forward-decl.fennel
-      set: pop-list-tail
-    - include: set-normal-list-tail
 
   pop-invoke-list-tail:
     - include: match-constant-set-normal-list-tail

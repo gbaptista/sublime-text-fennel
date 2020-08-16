@@ -31,3 +31,5 @@ jobs:
         with:
           build: ${{ matrix.build }}
           default_packages: ${{ matrix.packages }}
+          package_name: Fennel
+          package_root: sublime-3-fennel
