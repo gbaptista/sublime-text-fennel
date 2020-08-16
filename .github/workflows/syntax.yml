@@ -29,4 +29,4 @@ jobs:
         with:
           build: ${{ matrix.build }}
           package_name: Fennel
-          package_root: sublime-3-fennel
+          package_root: sublime-text-fennel
