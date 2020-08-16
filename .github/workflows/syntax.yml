@@ -23,7 +23,7 @@ jobs:
           - build: 3211
             packages: st3
           - build: 4073
-            packages: master
+            packages: st4
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
