@@ -1,0 +1,7 @@
+<snippet>
+    <content><![CDATA[lambda ${1:name} [${2:x}]
+  ${3:(${4:code})}]]></content>
+    <tabTrigger>lambda</tabTrigger>
+    <scope>source.fennel</scope>
+    <description>lambda</description>
+</snippet>

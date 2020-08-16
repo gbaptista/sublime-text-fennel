@@ -1,0 +1,10 @@
+<snippet>
+    <content>
+      <![CDATA[-?> ${1:(${2:value})}
+  ${3:(${4:f})}
+  ${5:(${6:f})}]]>
+    </content>
+    <tabTrigger>threading macro</tabTrigger>
+    <scope>source.fennel</scope>
+    <description><![CDATA[-?> threading macro]]></description>
+</snippet>

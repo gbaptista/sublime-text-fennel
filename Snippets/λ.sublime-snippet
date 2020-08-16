@@ -1,0 +1,7 @@
+<snippet>
+    <content><![CDATA[λ ${1:name} [${2:x}]
+  ${3:(${4:code})}]]></content>
+    <tabTrigger>lambd</tabTrigger>
+    <scope>source.fennel</scope>
+    <description>λ</description>
+</snippet>

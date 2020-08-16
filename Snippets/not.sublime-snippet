@@ -1,0 +1,8 @@
+<snippet>
+    <content>
+      <![CDATA[not ${1:(${2:=} ${3:a} ${4:b})}]]>
+    </content>
+    <tabTrigger>not</tabTrigger>
+    <scope>source.fennel</scope>
+    <description>not</description>
+</snippet>

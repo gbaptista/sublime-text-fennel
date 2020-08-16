@@ -1,0 +1,9 @@
+<snippet>
+    <content>
+      <![CDATA[while ${1:(${2:not} ${3:done?})}
+  ${4:(${5:code})}]]>
+    </content>
+    <tabTrigger>while</tabTrigger>
+    <scope>source.fennel</scope>
+    <description>while</description>
+</snippet>

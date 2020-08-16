@@ -1,0 +1,13 @@
+<snippet>
+    <content>
+      <![CDATA[do
+  (var done? false)
+  (while (not done?)
+    (${2:print :not-done})
+    (when (${1:> (math.random) 0.95})
+      (set done? true)))]]>
+    </content>
+    <tabTrigger>dowhile</tabTrigger>
+    <scope>source.fennel</scope>
+    <description>do while</description>
+</snippet>

@@ -1,0 +1,515 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+name: Fennel
+file_extensions:
+  - fnl
+scope: source.fennel
+
+variables:
+  lua_coroutine: 'coroutine\.(close|create|isyieldable|resume|running|status|wrap|yield)'
+  lua_debug: 'debug\.(debug|gethook|getinfo|getlocal|getmetatable|getregistry|getupvalue|getuservalue|setcstacklimit|sethook|setlocal|setmetatable|setupvalue|setuservalue|traceback|upvalueid|upvaluejoin)'
+  lua_io: 'io\.(close|flush|input|lines|open|output|popen|read|stderr|stdin|stdout|tmpfile|type|write)'
+  lua_math: 'math\.(abs|acos|asin|atan|atan2|ceil|cos|cosh|deg|exp|floor|fmod|frexp|huge|ldexp|log|maxinteger|max|mininteger|min|modf|pi|pow|rad|randomseed|random|sin|sinh|sqrt|tan|tanh|tointeger|type|ult)'
+  lua_os: 'os\.(clock|date|difftime|execute|exit|getenv|remove|rename|setlocale|time|tmpname)'
+  lua_package: 'package\.(config|cpath|loaded|loadlib|path|preload|searchers|searchpath)'
+  lua_string: 'string\.(byte|char|dump|find|format|gmatch|gsub|len|lower|match|packsize|pack|rep|reverse|sub|unpack|upper)'
+  lua_table: 'table\.(concat|insert|move|pack|remove|sort|unpack)'
+  lua_utf8: 'utf8\.(charpattern|char|codepoint|codes|len|offset)'
+
+  lua_variables: '_G|_VERSION|{{lua_coroutine}}|coroutine|{{lua_debug}}|debug|{{lua_io}}|io|{{lua_math}}|math|{{lua_os}}|os|{{lua_package}}|package|{{lua_string}}|string|{{lua_table}}|table|{{lua_utf8}}|utf8'
+  lua_functions: 'assert|collectgarbage|dofile|error|getmetatable|ipairs|loadfile|load|next|pairs|pcall|print|rawequal|rawget|rawlen|rawset|require|select|setmetatable|tonumber|tostring|type|warn|xpcall|{{lua_coroutine}}|{{lua_debug}}|{{lua_io}}|{{lua_math}}|{{lua_os}}|{{lua_package}}|{{lua_string}}|{{lua_table}}|{{lua_utf8}}'
+
+  # -------------------------------------------------
+
+  lua_constants: 'true|false|nil'
+  lua_keywords: 'and|if|not|or|while|do|for'
+  lua_operators: '\+|\-|\%|\*|\/\/|\/|\^|\.\.|\>|\<|\>=|\<=|=|\.|\:|\.\.\.'
+
+  # -------------------------------------------------
+
+  fennel_threading_macros: (?:->|-\?>>|-\?>|-\>\>)(?=[{{non_symbol_chars}}])
+  fennel_operators: 'not='
+  fennel_keywords: 'band|bnot|bor|bxor|doc|dotimes|doto|each|eval-compiler|global|hashfn|import-macros|include|length|lshift|macro|macrodebug|macros|match|partial|pick-args|pick-values|println|rshift|set|tset|unpack|values|var|when|with-open'
+  # -------------------------------------------------
+
+  non_symbol_chars: \s,;\(\)\[\]{}\"`~@\^\\
+
+  non_symbol_start_chars: '{{non_symbol_chars}}\d#'':'
+  non_number_chars: '{{non_symbol_chars}}#'''
+  non_char_chars: '{{non_symbol_chars}}#'''
+  atom: '[^{{non_symbol_chars}}]+'
+  symbol: (?:/|[^{{non_symbol_start_chars}}][^{{non_symbol_chars}}]*)
+  # Slightly too permissive
+  keyword: (:):?[^:{{non_symbol_chars}}][^{{non_symbol_chars}}]*
+  constant: (?:{{lua_constants}})(?=[{{non_symbol_chars}}])
+  lua_support: (?:{{lua_operators}}|{{lua_keywords}}|{{lua_functions}})(?=[{{non_symbol_chars}}])
+  fennel_support: (?:{{fennel_operators}}|{{fennel_keywords}})(?=[{{non_symbol_chars}}])
+  evil_octal: '[-+]?0\d+N?(?=[{{non_symbol_chars}}])'
+  sign: '[-+]?'
+  exponent: (?:[eE]{{sign}}\d+)
+  dec_integer: ({{sign}})\d+(N?)(?=[{{non_number_chars}}])
+  hex_integer: ({{sign}})(0[Xx])\h+(N?)(?=[{{non_number_chars}}])
+  other_integer: ({{sign}})((?:[2-9]|[1-9]\d+)[Rr])[0-9A-Za-z]+(?=[{{non_number_chars}}])
+  rational: ({{sign}})\d+(/)\d+(?=[{{non_number_chars}}])
+  float: ({{sign}})\d+(?:(?:(\.)\d+{{exponent}}?|{{exponent}})(M)?|(M))(?=[{{non_number_chars}}])
+
+contexts:
+  main:
+    - include: match-expr
+
+  match-expr:
+    - include: match-noise
+    - match: '[)\]}]'
+      scope: invalid.illegal.fennel
+    - match: \(
+      scope: punctuation.section.parens.begin.fennel
+      push: pop-list-head
+    - match: \[
+      scope: punctuation.section.brackets.begin.fennel
+      push:
+        - match: \]
+          scope: punctuation.section.brackets.end.fennel
+          pop: true
+        - include: match-expr
+    - match: '#?{'
+      scope: punctuation.section.braces.begin.fennel
+      push:
+        - match: '}'
+          scope: punctuation.section.braces.end.fennel
+          pop: true
+        - match: ':\s'
+          scope: entity.name.tag.marco_import.fennel
+        - include: match-expr
+    - match: '"'
+      scope: punctuation.definition.string.begin.fennel
+      push: pop-string-tail
+    - match: \#
+      scope: entity.name.tag.literal_shorthand.fennel
+    - match: '[^:\s](\#)'
+      captures:
+        1: storage.type.auto_gensym.fennel
+    - match: '{{lua_variables}}|{{lua_functions}}'
+      scope: variable.language.lua_constant.fennel
+    - match: '\?'
+      scope: variable.function.optional.fennel
+      push: pop-expr
+    - match: '\$'
+      scope: variable.function.hash_shorthand.fennel
+    - match: '''|`|~|@'
+      scope: entity.other.inherited-class.macro.fennel
+      push: pop-expr
+    - match: \\\S[^{{non_char_chars}}]*
+      scope: constant.character.fennel
+    - match: '{{constant}}'
+      scope: constant.language.fennel
+    - match: '{{keyword}}'
+      scope: constant.other.keyword.fennel
+      captures:
+        1: punctuation.definition.keyword.fennel
+    - match: '{{evil_octal}}'
+      scope: invalid.deprecated.fennel
+    - match: '\.\.\.'
+      scope: keyword.operator.varargs.fennel
+    - match: '{{dec_integer}}'
+      scope: constant.numeric.integer.decimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: storage.type.numeric.fennel
+    - match: '{{hex_integer}}'
+      scope: constant.numeric.integer.hexadecimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.definition.numeric.base.fennel
+        3: storage.type.numeric.fennel
+    - match: '{{other_integer}}'
+      scope: constant.numeric.integer.other.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.definition.numeric.base.fennel
+    - match: '{{rational}}'
+      scope: constant.numeric.rational.decimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.separator.rational.fennel
+    - match: '{{float}}'
+      scope: constant.numeric.float.decimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.separator.decimal.fennel
+        3: storage.type.numeric.fennel
+        4: storage.type.numeric.fennel
+    - match: '{{atom}}'
+
+  pop-expr:
+    - include: match-noise
+    - match: '[)\]}]'
+      scope: invalid.illegal.fennel
+      pop: true
+    - match: \(
+      scope: punctuation.section.parens.begin.fennel
+      set: pop-list-head
+    - match: \[
+      scope: punctuation.section.brackets.begin.fennel
+      set:
+        - match: \]
+          scope: punctuation.section.brackets.end.fennel
+          pop: true
+        - include: match-expr
+    - match: '#?{'
+      scope: punctuation.section.braces.begin.fennel
+      set:
+        - match: '}'
+          scope: punctuation.section.braces.end.fennel
+          pop: true
+        - include: match-expr
+    - match: '"'
+      scope: punctuation.definition.string.begin.fennel
+      set: pop-string-tail
+    - match: '#'
+      scope: keyword.operator.macro.fennel.C
+      set: pop-dispatch-expr
+    - match: '''|`|~|@'
+      scope: keyword.operator.macro.fennel.D
+      set: pop-expr
+    - match: '\\\S[^{{non_char_chars}}]*'
+      scope: constant.character.fennel
+      pop: true
+    - match: '{{constant}}'
+      scope: constant.language.fennel
+      pop: true
+    - match: '{{keyword}}'
+      scope: constant.other.keyword.fennel
+      captures:
+        1: punctuation.definition.keyword.fennel
+      pop: true
+    - match: '{{evil_octal}}'
+      scope: invalid.deprecated.fennel
+      pop: true
+    - match: '\.\.\.'
+      scope: keyword.operator.varargs.fennel
+      pop: true
+    - match: '{{dec_integer}}'
+      scope: constant.numeric.integer.decimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: storage.type.numeric.fennel
+      pop: true
+    - match: '{{hex_integer}}'
+      scope: constant.numeric.integer.hexadecimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.definition.numeric.base.fennel
+        3: storage.type.numeric.fennel
+      pop: true
+    - match: '{{other_integer}}'
+      scope: constant.numeric.integer.other.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.definition.numeric.base.fennel
+      pop: true
+    - match: '{{rational}}'
+      scope: constant.numeric.rational.decimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.separator.rational.fennel
+      pop: true
+    - match: '{{float}}'
+      scope: constant.numeric.float.decimal.fennel
+      captures:
+        1: punctuation.definition.numeric.sign.fennel
+        2: punctuation.separator.decimal.fennel
+        3: storage.type.numeric.fennel
+        4: storage.type.numeric.fennel
+      pop: true
+    - match: '{{atom}}'
+      pop: true
+
+  match-noise:
+    # Explicitly matching \s also captures end-of-line; this allows apostrophe
+    # pairing to work at the last cursor position in a comment line.
+    - match: (;+|#!)(.|\s)*
+      scope: comment.line.fennel
+      captures:
+        1: punctuation.definition.comment
+    - match: ','
+      scope: entity.other.inherited-class.macro.punctuation.comma.fennel
+    # - match: \^
+    #   scope: keyword.operator.macro.fennel.E
+    #   push: pop-expr
+
+  pop-dispatch-expr:
+    - match: (?=\s)
+      set: pop-dispatch-tag-expr
+    - match: _
+      scope: keyword.operator.macro.fennel.F
+      set: pop-expr
+    - match: '#'
+      scope: keyword.operator.macro.fennel.G
+      set: pop-symbolic-value
+    - match: "'"
+      scope: keyword.operator.macro.fennel.H
+      pop: true
+    - match: '"'
+      scope: punctuation.definition.string.begin.fennel
+      set: pop-regexp-tail
+    - match: (?=[\^:])
+      pop: true
+    - match: (?=\S)
+      set: pop-dispatch-tag-expr
+
+  pop-dispatch-tag-expr:
+    - include: match-noise
+    - match: '{{symbol}}'
+      scope: keyword.operator.macro.fennel.I
+      pop: true
+    - match: (?=\S)
+      set: pop-expr
+
+  pop-symbolic-value:
+    - include: match-noise
+    - match: '{{atom}}'
+      scope: constant.other.symbolic.fennel
+      pop: true
+    - match: (?=\S)
+      set: pop-expr
+
+  pop-regexp-tail:
+    - meta_scope: string.regexp.fennel
+    - match: '"'
+      scope: punctuation.definition.string.end.fennel
+      pop: true
+    - match: ''
+      push: scope:source.regexp#base-literal
+      with_prototype:
+        - match: (?=")
+          pop: true
+
+  pop-string-tail:
+    - meta_scope: string.quoted.double.fennel
+    - match: \\.
+      scope: constant.character.escape.fennel
+    - match: '"'
+      scope: punctuation.definition.string.end.fennel
+      pop: true
+
+  pop-list-head:
+    - include: match-noise
+    - match: defprotocol[^{{non_symbol_chars}}]*
+      scope: storage.type.fennel
+      set: pop-declare-protocol-list-tail
+    - match: definterface[^{{non_symbol_chars}}]*
+      scope: storage.type.fennel
+      set: pop-declare-interface-list-tail
+    - match: (?:deftype|defrecord)[^{{non_symbol_chars}}]*
+      scope: storage.type.fennel
+      set: pop-declare-type-list-tail
+    - match: defmethod[^{{non_symbol_chars}}]*
+      scope: storage.modifier.def.fennel
+      set: pop-fn-list-tail
+    - match: def[^{{non_symbol_chars}}]*
+      scope: storage.modifier.def.fennel
+      set: pop-declare-def-list-tail
+    - match: (?:reify|proxy|extend-protocol|extend-type)[^{{non_symbol_chars}}]*
+      scope: variable.function.fennel
+      set: pop-type-list-tail
+    - match: (fn|lambda|λ)\*?(?=[{{non_symbol_chars}}])
+      scope: storage.modifier.fn.fennel
+      set: pop-fn-list-tail
+    - match: let\*?(?=[{{non_symbol_chars}}])
+      scope: entity.name.tag.let.fennel
+      set: pop-let-list-head
+    - match: (local|global)\*?(?=[{{non_symbol_chars}}])
+      scope: entity.name.tag.binding.fennel
+      set: pop-binding-list-head
+    - match: declare[^{{non_symbol_chars}}]*
+      scope: storage.modifier.declare.fennel
+      set: pop-declare-list-tail
+    - match: (?=\S)
+      set: pop-invoke-list-tail
+
+  pop-list-tail:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - include: match-expr
+
+  pop-declare-protocol-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: entity.name.type.fennel
+      set: pop-protocol-list-tail
+    - include: set-normal-list-tail
+
+  pop-protocol-list-tail:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - match: \(
+      scope: punctuation.section.parens.begin.fennel
+      push: pop-declare-def-list-tail
+    - include: match-expr
+
+  pop-declare-interface-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: entity.name.type.fennel
+      set: pop-interface-list-tail
+    - include: set-normal-list-tail
+
+  pop-interface-list-tail:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - match: \(
+      scope: punctuation.section.parens.begin.fennel
+      push: pop-fn-list-tail
+    - include: match-expr
+
+  pop-declare-type-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: entity.name.type.fennel
+      set: pop-type-list-tail
+    - include: set-normal-list-tail
+
+  pop-type-list-tail:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - match: \(
+      scope: punctuation.section.parens.begin.fennel
+      push: pop-fn-list-tail
+    - include: match-symbol-implemented-or-extended
+    - include: match-expr
+
+  pop-declare-def-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: entity.name.function.fennel
+      set: pop-list-tail
+    - include: set-normal-list-tail
+
+  pop-fn-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: entity.name.function.fn.fennel
+      set: pop-list-tail
+    - include: set-normal-list-tail
+
+  # ##########################
+
+  pop-binding-list-head:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - match: \(
+      scope: punctuation.section.parens.begin.fennel
+      set: pop-binding-first-block
+    - match: '{{symbol}}'
+      set: pop-binding-list-tail
+    - include: match-expr
+
+  pop-binding-first-block:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      set: pop-binding-list-tail
+
+  pop-binding-list-tail:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - include: match-expr
+
+  # ##########################
+
+  pop-let-list-head:
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      pop: true
+    - match: \[
+      scope: punctuation.section.brackets.begin.fennel
+      push:
+        - match: \(
+          scope: punctuation.section.parens.begin.fennel
+          set: pop-let-first-block
+        - match: \[
+          scope: punctuation.section.brackets.begin.fennel
+          set: pop-let-first-block
+        - match: .(\#)
+          captures:
+            1: storage.type.auto_gensym.fennel
+        - match: ','
+          scope: entity.other.inherited-class.macro.punctuation.comma.fennel
+        - match: '{{symbol}}'
+          set: pop-let-list-tail
+        - match: '#?{'
+          scope: punctuation.section.braces.begin.fennel
+          set: pop-let-list-tail
+    - include: match-expr
+
+  pop-let-first-block:
+    - match: .(\#)
+      captures:
+        1: storage.type.auto_gensym.fennel
+    - match: ','
+      scope: entity.other.inherited-class.macro.punctuation.comma.fennel
+    - match: \)
+      scope: punctuation.section.parens.end.fennel
+      set: pop-let-list-tail
+    - match: \]
+      scope: punctuation.section.brackets.end.fennel
+      set: pop-let-list-tail
+    - include: bind-operators
+
+  pop-let-list-tail:
+    - match: .(\#)
+      captures:
+        1: storage.type.auto_gensym.fennel
+    - match: ','
+      scope: entity.other.inherited-class.macro.punctuation.comma.fennel
+    - match: \]
+      scope: punctuation.section.brackets.end.fennel
+      pop: true  
+    - match: '}'
+      scope: punctuation.section.braces.end.fennel
+    - include: bind-operators
+    - include: match-expr
+
+  bind-operators:
+    - match: '\s(:|&)\s'
+      scope: keyword.operator.bind.fennel
+
+  pop-declare-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: entity.name.function.forward-decl.fennel
+      set: pop-list-tail
+    - include: set-normal-list-tail
+
+  pop-invoke-list-tail:
+    - include: match-constant-set-normal-list-tail
+    - match: '{{symbol}}'
+      scope: variable.function.fennel
+      set: pop-list-tail
+    - include: set-normal-list-tail
+
+  match-constant-set-normal-list-tail:
+    - include: match-noise
+    - match: '{{fennel_support}}'
+      scope: entity.name.tag.fennel_support.fennel
+      set: pop-list-tail
+    - match: '{{lua_support}}'
+      scope: entity.name.tag.lua_support.fennel
+      set: pop-list-tail
+    - match: '{{fennel_threading_macros}}'
+      scope: entity.name.tag.fennel_threading_macros.fennel
+      set: pop-list-tail
+    - match: '{{constant}}'
+      scope: constant.language.fennel
+      set: pop-list-tail
+
+  set-normal-list-tail:
+    - match: (?=\S)
+      set: pop-list-tail
