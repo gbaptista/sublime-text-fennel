@@ -1,6 +1,6 @@
 {
 	"word_separators": "/\\()[]{}\"'`,:;@#^~.",
-	"smart_indent": false,
-	"detect_indentation": false,
-	"draw_indent_guides": false
+  "tab_size": 1,
+  "draw_indent_guides": false,
+  "translate_tabs_to_spaces": true
 }
