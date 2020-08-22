@@ -1,5 +1,5 @@
 {
-	"word_separators": "/\\()[]{}\"'`,:;@#^~.",
+  "word_separators": "/\\()[]{}\"'`,:;@#^~.",
   "tab_size": 1,
   "draw_indent_guides": false,
   "translate_tabs_to_spaces": true
