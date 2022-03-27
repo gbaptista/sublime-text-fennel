@@ -1,6 +1,6 @@
 ; SYNTAX TEST "Packages/Fennel/Fennel.sublime-syntax"
 
-; Fennel 0.5.0 on Lua 5.4.0
+; Fennel 1.1.0 on Lua 5.4.4
 
 ; Hash function literal shorthand
 

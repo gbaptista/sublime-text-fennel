@@ -1,7 +1,7 @@
 {
   "scope": "source.fennel",
   "completions": [
-    // Lua 5.4.0
+    // Lua 5.4.4
     "_G",
     "_VERSION",
 
@@ -179,29 +179,34 @@
     "utf8.len",
     "utf8.offset",
 
-    // Fennel 0.5.0
-    "not=",
+    // Fennel 1.1.0
+    ":until",
+    ":into",
     "band",
+    "_ENV",
     "bnot",
+    "accumulate",
     "bor",
     "bxor",
-    "doc",
+    "collect",
     "dotimes",
     "doto",
     "each",
     "eval-compiler",
-    "global",
     "hashfn",
+    "icollect",
     "import-macros",
     "include",
     "length",
     "lshift",
+    "match-try",
+    "catch",
     "macro",
     "macrodebug",
     "macros",
     "match",
+    "not=",
     "partial",
-    "pick-args",
     "pick-values",
     "println",
     "rshift",
@@ -211,13 +216,41 @@
     "values",
     "var",
     "when",
-    "with-open"
+    "where",
+    "with-open",
+
+    "fennel.comment",
+    "fennel.comment?",
+    "fennel.compile",
+    "fennel.compile-stream",
+    "fennel.compile-string",
+    "fennel.doc",
+    "fennel.dofile",
+    "fennel.eval",
+    "fennel.list",
+    "fennel.list?",
+    "fennel.load-code",
+    "fennel.macro-loaded",
+    "fennel.macro-path",
+    "fennel.macro-searchers",
+    "fennel.make-searcher",
+    "fennel.metadata",
+    "fennel.parser",
+    "fennel.path",
+    "fennel.repl",
+    "fennel.runtime-version",
+    "fennel.search-module",
+    "fennel.searcher",
+    "fennel.sequence",
+    "fennel.sequence?",
+    "fennel.sym",
+    "fennel.sym-char?",
+    "fennel.sym?",
+    "fennel.syntax",
+    "fennel.traceback",
+    "fennel.varg",
+    "fennel.varg?",
+    "fennel.view"
   ]
 }
-
-
-
-
-
-
 

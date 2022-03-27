@@ -17,21 +17,22 @@ variables:
   lua_string: 'string\.(byte|char|dump|find|format|gmatch|gsub|len|lower|match|packsize|pack|rep|reverse|sub|unpack|upper)'
   lua_table: 'table\.(concat|insert|move|pack|remove|sort|unpack)'
   lua_utf8: 'utf8\.(charpattern|char|codepoint|codes|len|offset)'
+  fennel_api: '(fennel)\.(comment\?|comment|compile|compile-stream|compile-string|doc|dofile|eval|list\?|list|load-code|macro-loaded|macro-path|macro-searchers|make-searcher|metadata|parser|path|repl|runtime-version|search-module|searcher|sequence\?|sequence|sym-char\?|sym\?|sym|syntax|traceback|varg\?|varg|view)'
 
-  lua_variables: '_G|_VERSION|{{lua_coroutine}}|coroutine|{{lua_debug}}|debug|{{lua_io}}|io|{{lua_math}}|math|{{lua_os}}|os|{{lua_package}}|package|{{lua_string}}|string|{{lua_table}}|table|{{lua_utf8}}|utf8'
+  lua_variables: '_G|_ENV|_VERSION|_V|{{lua_coroutine}}|coroutine|{{lua_debug}}|debug|{{lua_io}}|io|{{lua_math}}|math|{{lua_os}}|os|{{lua_package}}|package|{{lua_string}}|string|{{lua_table}}|table|{{lua_utf8}}|utf8'
   lua_functions: 'assert|collectgarbage|dofile|error|getmetatable|ipairs|loadfile|load|next|pairs|pcall|print|rawequal|rawget|rawlen|rawset|require|select|setmetatable|tonumber|tostring|type|warn|xpcall|{{lua_coroutine}}|{{lua_debug}}|{{lua_io}}|{{lua_math}}|{{lua_os}}|{{lua_package}}|{{lua_string}}|{{lua_table}}|{{lua_utf8}}'
 
   # -------------------------------------------------
 
   lua_constants: 'true|false|nil'
   lua_keywords: 'and|if|not|or|while|do|for'
-  lua_operators: '\+|\-|\%|\*|\/\/|\/|\^|\.\.|\>|\<|\>=|\<=|=|\.|\:|\.\.\.'
+  lua_operators: '\+|\-|\%|\*|\/\/|\/|\^|\.\.|\?\.|\>|\<|\>=|\<=|=|\.|\:|\.\.\.'
 
   # -------------------------------------------------
 
   fennel_threading_macros: (?:->|-\?>>|-\?>|-\>\>)(?=[{{non_symbol_chars}}])
   fennel_operators: 'not='
-  fennel_keywords: 'band|bnot|bor|bxor|doc|dotimes|doto|each|eval-compiler|global|hashfn|import-macros|include|length|lshift|macro|macrodebug|macros|match|partial|pick-args|pick-values|println|rshift|set|tset|unpack|values|var|when|with-open'
+  fennel_keywords: 'band|bnot|bor|bxor|dotimes|doto|each|where|icollect|collect|accumulate|eval-compiler|hashfn|import-macros|include|length|lshift|macro|macrodebug|macros|match-try|catch|match|partial|pick-values|println|rshift|set|tset|unpack|values|var|when|with-open'
   # -------------------------------------------------
 
   non_symbol_chars: \s,;\(\)\[\]{}\"`~@\^\\
@@ -45,7 +46,7 @@ variables:
   keyword: (:):?[^:{{non_symbol_chars}}][^{{non_symbol_chars}}]*
   constant: (?:{{lua_constants}})(?=[{{non_symbol_chars}}])
   lua_support: (?:{{lua_operators}}|{{lua_keywords}}|{{lua_functions}})(?=[{{non_symbol_chars}}])
-  fennel_support: (?:{{fennel_operators}}|{{fennel_keywords}})(?=[{{non_symbol_chars}}])
+  fennel_support: (?:{{fennel_operators}}|{{fennel_keywords}}|{{fennel_api}})(?=[{{non_symbol_chars}}])
   evil_octal: '[-+]?0\d+N?(?=[{{non_symbol_chars}}])'
   sign: '[-+]?'
   exponent: (?:[eE]{{sign}}\d+)
@@ -73,7 +74,9 @@ contexts:
           scope: punctuation.section.brackets.end.fennel
           pop: true
         - include: match-expr
-    - match: '#?{'
+    - match: '(#)?{'
+      captures:
+        1: entity.name.tag.literal_shorthand.fennel
       scope: punctuation.section.braces.begin.fennel
       push:
         - match: '}'
@@ -95,6 +98,14 @@ contexts:
     - match: '\?'
       scope: variable.function.optional.fennel
       push: pop-expr
+    - match: '\$(\.\.\.)'
+      scope: variable.function.hash_shorthand.fennel
+      captures:
+        1: keyword.operator.varargs.fennel
+    - match: '\$(\.)'
+      scope: variable.function.hash_shorthand.fennel
+      captures:
+        1: entity.name.tag.lua_support.fennel
     - match: '\$'
       scope: variable.function.hash_shorthand.fennel
     - match: '''|`|~|@'
@@ -249,7 +260,7 @@ contexts:
     - match: let\*?(?=[{{non_symbol_chars}}])
       scope: entity.name.tag.let.fennel
       set: pop-let-list-head
-    - match: (local|global)\*?(?=[{{non_symbol_chars}}])
+    - match: (local)\*?(?=[{{non_symbol_chars}}])
       scope: entity.name.tag.binding.fennel
       set: pop-binding-list-head
     - match: (?=\S)
@@ -348,7 +359,7 @@ contexts:
     - include: match-expr
 
   bind-operators:
-    - match: '\s(:|&)\s'
+    - match: '\s(:|&|&as)\s'
       scope: keyword.operator.bind.fennel
 
   pop-invoke-list-tail:
