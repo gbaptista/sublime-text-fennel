@@ -92,7 +92,3 @@ The [_Clojure Package_](https://github.com/sublimehq/Packages/tree/master/Clojur
 ![Screenshot of a Fennel code highlighted.](https://raw.githubusercontent.com/gbaptista/sublime-text-fennel/master/screenshots/snippets/01.png)
 
 ![Screenshot of a Fennel code highlighted.](https://raw.githubusercontent.com/gbaptista/sublime-text-fennel/master/screenshots/snippets/02.png)
-
-## Development
-
-TODO
