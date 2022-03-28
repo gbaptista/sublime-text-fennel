@@ -2,7 +2,7 @@
 
 > _"Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system." [fennel-lang.org](https://fennel-lang.org)_
 
-Heavily tested against [Fennel 0.5.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_fennel_reference.fnl) and [Lua 5.4.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_lua.fnl) specifications.
+Heavily tested against [Fennel 1.1.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_fennel_reference.fnl) and [Lua 5.4.4](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_lua.fnl) specifications.
 
 ![Screenshot of a Fennel code highlighted.](https://raw.githubusercontent.com/gbaptista/sublime-text-fennel/master/screenshots/material-theme-darker/03.png)
 
@@ -18,10 +18,11 @@ Heavily tested against [Fennel 0.5.0](https://github.com/gbaptista/sublime-text-
   -  [Solarized (Light)](#solarized-light-screenshots)
   -  [Completions](#completions-screenshots)
   -  [Snippets](#snippets-screenshots)
+- [Development](#development)
 
 ## Completions
 
-One hundred ninety-four completions are available for _Fennel 0.5.0_ and _Lua 5.4.0_.
+One hundred ninety-four completions are available for _Fennel 1.1.0_ and _Lua 5.4.4_.
 
 #### Fennel Completions
 
@@ -48,7 +49,7 @@ The [_Clojure Package_](https://github.com/sublimehq/Packages/tree/master/Clojur
 
 ## References
 - [Fennel Language Website](https://fennel-lang.org)
-  - [Fennel 0.5.0 Reference](https://fennel-lang.org/reference)
+  - [Fennel 1.1.0 Reference](https://fennel-lang.org/reference)
 - [Lua Language Website](http://www.lua.org/)
   - [Lua 5.4 Reference Manual](https://www.lua.org/manual/5.4)
 

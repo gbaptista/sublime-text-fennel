@@ -1,6 +1,6 @@
 ; SYNTAX TEST "Packages/Fennel/Fennel.sublime-syntax"
 
-; Fennel 0.5.0 on Lua 5.4.0
+; Fennel 1.1.0 on Lua 5.4.0
 
 ; These are all the special forms recognized by the Fennel compiler. It does not include built-in Lua functions; see the Lua reference manual or the Lua primer for that.
 
@@ -170,6 +170,7 @@
 
 #[$1 $2 $3]       ; same as (fn [a b c] [a b c])
 ; <- entity.name.tag.literal_shorthand.fennel
+;^ punctuation.section.brackets.begin.fennel
 ; ^ variable.function.hash_shorthand.fennel
 ;  ^ constant.numeric.integer.decimal.fennel
 ;    ^ variable.function.hash_shorthand.fennel
@@ -427,7 +428,7 @@
 
 (pick-args 2 add) ; expands to `(fn [_0_ _1_] (add _0_ _1_))`
 ; <- punctuation.section.parens.begin.fennel
-;^^^^^^^^^ entity.name.tag.fennel_support.fennel
+;^^^^^^^^^ variable.function.fennel
 ;          ^ constant.numeric.integer.decimal.fennel
 ;            ^^^ source.fennel
 ;               ^ punctuation.section.parens.end.fennel
@@ -447,7 +448,7 @@
 ;                ^^^^^^^^^^^^ entity.name.tag.lua_support.fennel
 ;                            ^ punctuation.section.parens.end.fennel
 ;                              ^^ punctuation.section.parens.begin.fennel
-;                                ^^^^^^^^^ entity.name.tag.fennel_support.fennel
+;                                ^^^^^^^^^ variable.function.fennel
 ;                                          ^ constant.numeric.integer.decimal.fennel
 ;                                            ^^^ source.fennel
 ;                                               ^^^ punctuation.section.parens.end.fennel
@@ -468,7 +469,7 @@
 ((pick-args 3 count-args) "still three args, but 2nd and 3rd are nil") ; => 3
 ; <- punctuation.section.parens.begin.fennel
 ;^ punctuation.section.parens.begin.fennel
-; ^^^^^^^^^ entity.name.tag.fennel_support.fennel
+; ^^^^^^^^^ variable.function.fennel
 ;           ^ constant.numeric.integer.decimal.fennel
 ;             ^^^^^^^^^^ source.fennel
 ;                       ^ punctuation.section.parens.end.fennel
@@ -927,7 +928,7 @@
 
 (global prettyprint (fn [x] (print (view x))))
 ; <- punctuation.section.parens.begin.fennel
-;^^^^^^ entity.name.tag.binding.fennel
+;^^^^^^ variable.function.fennel
 ;       ^^^^^^^^^^^ source.fennel
 ;                   ^ punctuation.section.parens.begin.fennel
 ;                    ^^ storage.modifier.fn.fennel
@@ -1083,7 +1084,7 @@
 ; TODO: Open a pull request to remove comma and fix variable name
 (global (x-m x-e) (math.frexp 21)) {:m x-m :e x-e} ;  => {:e 5 :m 0.65625}
 ; <- punctuation.section.parens.begin.fennel
-;^^^^^^ entity.name.tag.binding.fennel
+;^^^^^^ variable.function.fennel
 ;       ^ punctuation.section.parens.begin.fennel
 ;        ^^^^^^^ source.fennel
 ;               ^ punctuation.section.parens.end.fennel
