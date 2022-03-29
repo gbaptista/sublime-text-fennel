@@ -80,7 +80,7 @@ Check the files under `tests/` and:
 
 To debug the current scope of a character: <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>
 
-The project [_Sublime Text Colors_](https://github.com/gbaptista/sublime-text-colors) may be helpfull.
+The project [_Sublime Text Colors_](https://github.com/gbaptista/sublime-text-colors) may be helpful.
 
 ## Screenshots
 
