@@ -19,7 +19,8 @@ variables:
   lua_utf8: 'utf8\.(charpattern|char|codepoint|codes|len|offset)'
   fennel_api: '(fennel)\.(comment\?|comment|compile|compile-stream|compile-string|doc|dofile|eval|list\?|list|load-code|macro-loaded|macro-path|macro-searchers|make-searcher|metadata|parser|path|repl|runtime-version|search-module|searcher|sequence\?|sequence|sym-char\?|sym\?|sym|syntax|traceback|varg\?|varg|view)'
 
-  lua_variables: '_G|_ENV|_VERSION|_V|{{lua_coroutine}}|coroutine|{{lua_debug}}|debug|{{lua_io}}|io|{{lua_math}}|math|{{lua_os}}|os|{{lua_package}}|package|{{lua_string}}|string|{{lua_table}}|table|{{lua_utf8}}|utf8'
+  constants: '_G|_ENV|_VERSION|_V'
+  lua_variables: '{{lua_coroutine}}|coroutine|{{lua_debug}}|debug|{{lua_io}}|io|{{lua_math}}|math|{{lua_os}}|os|{{lua_package}}|package|{{lua_string}}|string|{{lua_table}}|table|{{lua_utf8}}|utf8'
   lua_functions: 'assert|collectgarbage|dofile|error|getmetatable|ipairs|loadfile|load|next|pairs|pcall|print|rawequal|rawget|rawlen|rawset|require|select|setmetatable|tonumber|tostring|type|warn|xpcall|{{lua_coroutine}}|{{lua_debug}}|{{lua_io}}|{{lua_math}}|{{lua_os}}|{{lua_package}}|{{lua_string}}|{{lua_table}}|{{lua_utf8}}'
 
   # -------------------------------------------------
@@ -93,6 +94,8 @@ contexts:
     - match: '[^:\s"](\#)'
       captures:
         1: storage.type.auto_gensym.fennel
+    - match: '{{constants}}'
+      scope: entity.other.inherited-class.constant.fennel
     - match: '{{lua_variables}}|{{lua_functions}}'
       scope: variable.language.lua_constant.fennel
     - match: '\?'
