@@ -30,6 +30,21 @@
 
 ; New forms
 
+_1 7/8 1_
+; <- source.fennel
+;^^^^^^^^ source.fennel
+
+10 120_000 1.5 120_0_00.10_10_0
+; <- constant.numeric.integer.decimal.fennel
+;^ constant.numeric.integer.decimal.fennel
+;  ^^^^^^^ constant.numeric.integer.decimal.fennel
+;          ^ constant.numeric.float.decimal.fennel
+;           ^ punctuation.separator.decimal.fennel
+;            ^ constant.numeric.float.decimal.fennel
+;              ^^^^^^^^ constant.numeric.float.decimal.fennel
+;                      ^ punctuation.separator.decimal.fennel
+;                       ^^^^^^^ constant.numeric.float.decimal.fennel
+
 (collect [k v (pairs {:apple "red" :orange "orange"})]
 ; <- punctuation.section.parens.begin.fennel
 ;^^^^^^^ entity.name.tag.fennel_support.fennel
@@ -250,7 +265,7 @@
 (set _G.a 1)
 ; <- punctuation.section.parens.begin.fennel
 ;^^^ entity.name.tag.fennel_support.fennel
-;    ^^ variable.language.lua_constant.fennel
+;    ^^ entity.other.inherited-class.constant.fennel
 ;      ^^ source.fennel
 ;         ^ constant.numeric.integer.decimal.fennel
 ;          ^ punctuation.section.parens.end.fennel
@@ -258,7 +273,7 @@
 (set _ENV.a 2)
 ; <- punctuation.section.parens.begin.fennel
 ;^^^ entity.name.tag.fennel_support.fennel
-;    ^^^^ variable.language.lua_constant.fennel
+;    ^^^^ entity.other.inherited-class.constant.fennel
 ;        ^^ source.fennel
 ;           ^ constant.numeric.integer.decimal.fennel
 ;            ^ punctuation.section.parens.end.fennel

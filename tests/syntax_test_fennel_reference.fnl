@@ -2279,7 +2279,7 @@
 ;        ^^^^ source.fennel
 ;             ^ punctuation.section.parens.begin.fennel
 ;              ^^^^^ entity.name.tag.lua_support.fennel
-;                    ^^ variable.language.lua_constant.fennel
+;                    ^^ entity.other.inherited-class.constant.fennel
 ;                      ^ punctuation.section.parens.end.fennel
 ;                       ^ punctuation.section.brackets.end.fennel
     (print name)))

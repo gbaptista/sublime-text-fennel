@@ -51,11 +51,12 @@ variables:
   evil_octal: '[-+]?0\d+N?(?=[{{non_symbol_chars}}])'
   sign: '[-+]?'
   exponent: (?:[eE]{{sign}}\d+)
-  dec_integer: ({{sign}})\d+(N?)(?=[{{non_number_chars}}])
+  number_separator: \d+(?:_\d+)*
+  dec_integer: ({{sign}}){{number_separator}}(N?)(?=[{{non_number_chars}}])
   hex_integer: ({{sign}})(0[Xx])\h+(N?)(?=[{{non_number_chars}}])
   other_integer: ({{sign}})((?:[2-9]|[1-9]\d+)[Rr])[0-9A-Za-z]+(?=[{{non_number_chars}}])
   rational: ({{sign}})\d+(/)\d+(?=[{{non_number_chars}}])
-  float: ({{sign}})\d+(?:(?:(\.)\d+{{exponent}}?|{{exponent}})(M)?|(M))(?=[{{non_number_chars}}])
+  float: ({{sign}}){{number_separator}}(?:(?:(\.){{number_separator}}{{exponent}}?|{{exponent}})(M)?|(M))(?=[{{non_number_chars}}])
 
 contexts:
   main:
@@ -142,11 +143,11 @@ contexts:
       captures:
         1: punctuation.definition.numeric.sign.fennel
         2: punctuation.definition.numeric.base.fennel
-    - match: '{{rational}}'
-      scope: constant.numeric.rational.decimal.fennel
-      captures:
-        1: punctuation.definition.numeric.sign.fennel
-        2: punctuation.separator.rational.fennel
+    # - match: '{{rational}}'
+    #   scope: constant.numeric.rational.decimal.fennel
+    #   captures:
+    #     1: punctuation.definition.numeric.sign.fennel
+    #     2: punctuation.separator.rational.fennel
     - match: '{{float}}'
       scope: constant.numeric.float.decimal.fennel
       captures:

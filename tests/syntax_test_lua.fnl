@@ -27,7 +27,7 @@
 (print _G)
 ; <- punctuation.section.parens.begin.fennel
 ;^^^^^ entity.name.tag.lua_support.fennel
-;      ^^ variable.language.lua_constant.fennel
+;      ^^ entity.other.inherited-class.constant.fennel
 ;        ^ punctuation.section.parens.end.fennel
 
 (print (_G 1))
@@ -41,7 +41,7 @@
 (print _VERSION)
 ; <- punctuation.section.parens.begin.fennel
 ;^^^^^ entity.name.tag.lua_support.fennel
-;      ^^^^^^^^ variable.language.lua_constant.fennel
+;      ^^^^^^^^ entity.other.inherited-class.constant.fennel
 ;              ^ punctuation.section.parens.end.fennel
 
 (print (_VERSION 1))
