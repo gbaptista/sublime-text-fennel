@@ -110,6 +110,11 @@ contexts:
       scope: variable.function.hash_shorthand.fennel
       captures:
         1: entity.name.tag.lua_support.fennel
+    - match: '\$(\d+)(\.)'
+      scope: variable.function.hash_shorthand.fennel
+      captures:
+        1: constant.numeric.integer.decimal.fennel
+        2: entity.name.tag.lua_support.fennel
     - match: '\$'
       scope: variable.function.hash_shorthand.fennel
     - match: '''|`|~|@'

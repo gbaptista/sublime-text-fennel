@@ -145,6 +145,15 @@ _1 7/8 1_
 ;           ^^^ keyword.operator.varargs.fennel
 ;              ^ punctuation.section.braces.end.fennel
 
+#{$1.bar.foo}
+; <- entity.name.tag.literal_shorthand.fennel
+;^ punctuation.section.braces.begin.fennel
+; ^ variable.function.hash_shorthand.fennel
+;  ^ constant.numeric.integer.decimal.fennel
+;   ^ entity.name.tag.lua_support.fennel
+;    ^^^^^^^ source.fennel
+;           ^ punctuation.section.braces.end.fennel
+
 #$.foo
 ; <- entity.name.tag.literal_shorthand.fennel
 ;^ variable.function.hash_shorthand.fennel
