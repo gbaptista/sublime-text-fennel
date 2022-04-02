@@ -160,6 +160,46 @@ _1 7/8 1_
 ; ^ entity.name.tag.lua_support.fennel
 ;  ^^^ source.fennel
 
+(if error2 true false)
+; <- punctuation.section.parens.begin.fennel
+;^^ entity.name.tag.lua_support.fennel
+;   ^^^^^^ source.fennel
+;          ^^^^ constant.language.fennel
+;               ^^^^^ constant.language.fennel
+;                    ^ punctuation.section.parens.end.fennel
+
+(if has-error true false)
+; <- punctuation.section.parens.begin.fennel
+;^^ entity.name.tag.lua_support.fennel
+;   ^^^^^^^^^ source.fennel
+;             ^^^^ constant.language.fennel
+;                  ^^^^^ constant.language.fennel
+;                       ^ punctuation.section.parens.end.fennel
+
+(if has_error true false)
+; <- punctuation.section.parens.begin.fennel
+;^^ entity.name.tag.lua_support.fennel
+;   ^^^^^^^^^ source.fennel
+;             ^^^^ constant.language.fennel
+;                  ^^^^^ constant.language.fennel
+;                       ^ punctuation.section.parens.end.fennel
+
+(if hasError true false)
+; <- punctuation.section.parens.begin.fennel
+;^^ entity.name.tag.lua_support.fennel
+;   ^^^^^^^^ source.fennel
+;            ^^^^ constant.language.fennel
+;                 ^^^^^ constant.language.fennel
+;                      ^ punctuation.section.parens.end.fennel
+
+(if errorMessage true false)
+; <- punctuation.section.parens.begin.fennel
+;^^ entity.name.tag.lua_support.fennel
+;   ^^^^^^^^^^^^ source.fennel
+;                ^^^^ constant.language.fennel
+;                     ^^^^^ constant.language.fennel
+;                          ^ punctuation.section.parens.end.fennel
+
 (match-try a
 ; <- punctuation.section.parens.begin.fennel
 ;^^^^^^^^^ entity.name.tag.fennel_support.fennel

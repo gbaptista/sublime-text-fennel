@@ -52,6 +52,13 @@
 ;                ^ constant.numeric.integer.decimal.fennel
 ;                 ^^ punctuation.section.parens.end.fennel
 
+(print assert
+; <- punctuation.section.parens.begin.fennel
+;^^^^^ entity.name.tag.lua_support.fennel
+;      ^^^^^^ variable.language.lua_constant.fennel
+)
+; <- punctuation.section.parens.end.fennel
+
 (print assert)
 ; <- punctuation.section.parens.begin.fennel
 ;^^^^^ entity.name.tag.lua_support.fennel

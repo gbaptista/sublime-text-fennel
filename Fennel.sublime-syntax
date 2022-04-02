@@ -97,8 +97,15 @@ contexts:
         1: storage.type.auto_gensym.fennel
     - match: '{{constants}}'
       scope: entity.other.inherited-class.constant.fennel
-    - match: '{{lua_variables}}|{{lua_functions}}'
-      scope: variable.language.lua_constant.fennel
+    # - match: '({{lua_variables}}|{{lua_functions}})+[\d\-\_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]'
+    #   scope: source.fennel
+    - match: '({{lua_variables}}|{{lua_functions}})[\s\n]'
+      captures:
+        1: variable.language.lua_constant.fennel
+    - match: '({{lua_variables}}|{{lua_functions}})(\))'
+      captures:
+        0: punctuation.section.parens.end.fennel
+        1: variable.language.lua_constant.fennel
     - match: '\?'
       scope: variable.function.optional.fennel
       push: pop-expr
