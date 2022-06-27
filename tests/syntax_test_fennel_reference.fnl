@@ -179,19 +179,19 @@
 ;        ^ constant.numeric.integer.decimal.fennel
 ;         ^ punctuation.section.brackets.end.fennel
 ;                 ^ punctuation.definition.comment
-;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 #$                ; same as (fn [x] x) (aka the identity function)
 ; <- entity.name.tag.literal_shorthand.fennel
 ;^ variable.function.hash_shorthand.fennel
 ;                 ^ punctuation.definition.comment
-;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 #val              ; same as (fn [] val)
 ; <- entity.name.tag.literal_shorthand.fennel
 ;^^^ source.fennel
 ;                 ^ punctuation.definition.comment
-;                  ^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                  ^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 #[:one :two $...] ; same as (fn [...] ["one" "two" ...])
 ; <- entity.name.tag.literal_shorthand.fennel
@@ -204,7 +204,7 @@
 ;            ^^^ keyword.operator.varargs.fennel
 ;               ^ punctuation.section.brackets.end.fennel
 ;                 ^ punctuation.definition.comment
-;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; Hash arguments can also be used as parts of multisyms. For instance, #$.foo is a function which will return the value of the “foo” key in its first argument.
 
@@ -282,7 +282,7 @@
 ;                           ^ constant.other.keyword.fennel
 ;                            ^ punctuation.section.parens.end.fennel
 ;                              ^ punctuation.definition.comment
-;                               ^^^^^^^ comment.line.fennel
+;                               ^^^^^^^ comment.line.semicolon.fennel
 
 [(pick-values 2 (table.unpack [:a :b :c]))] ;-> ["a" "b"]
 ; <- punctuation.section.brackets.begin.fennel
@@ -302,7 +302,7 @@
 ;                                       ^^ punctuation.section.parens.end.fennel
 ;                                         ^ punctuation.section.brackets.end.fennel
 ;                                           ^ punctuation.definition.comment
-;                                            ^^^^^^^^^^^^ comment.line.fennel
+;                                            ^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 (fn add [x y ...] (let [sum (+ (or x 0) (or y 0))]
 ; <- punctuation.section.parens.begin.fennel
@@ -361,7 +361,7 @@
 ;                            ^^ constant.numeric.integer.decimal.fennel
 ;                              ^^ punctuation.section.parens.end.fennel
 ;                                 ^ punctuation.definition.comment
-;                                  ^^^^^^ comment.line.fennel
+;                                  ^^^^^^ comment.line.semicolon.fennel
 (->> [1 2 3 4 5] (table.unpack) (pick-values 3) (add)) ; => 6
 ; <- punctuation.section.parens.begin.fennel
 ;^^^ entity.name.tag.fennel_threading_macros.fennel
@@ -381,8 +381,8 @@
 ;                                               ^ punctuation.section.parens.begin.fennel
 ;                                                ^^^ variable.function.fennel
 ;                                                   ^^ punctuation.section.parens.end.fennel
-;                                                       ^ comment.line.fennel
-;                                                        ^^^^ comment.line.fennel
+;                                                       ^ comment.line.semicolon.fennel
+;                                                        ^^^^ comment.line.semicolon.fennel
 
 ; Note: If n is greater than the number of values supplied, n values will still be emitted. This is reflected when using (select "#" ...) to count varargs, but tables [...] ignore trailing nils:
 
@@ -402,7 +402,7 @@
 ;                                   ^ punctuation.definition.string.end.fennel
 ;                                    ^^ punctuation.section.parens.end.fennel
 ;                                       ^ punctuation.definition.comment
-;                                        ^^^^^ comment.line.fennel
+;                                        ^^^^^ comment.line.semicolon.fennel
 [(pick-values 5 "one" "two")]           ; => ["one" "two"]
 ; <- punctuation.section.brackets.begin.fennel
 ;^ punctuation.section.parens.begin.fennel
@@ -417,7 +417,7 @@
 ;                          ^ punctuation.section.parens.end.fennel
 ;                           ^ punctuation.section.brackets.end.fennel
 ;                                       ^ punctuation.definition.comment
-;                                        ^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                                        ^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; pick-args create a function of fixed arity
 ; (Since 0.4.0)
@@ -433,7 +433,7 @@
 ;            ^^^ source.fennel
 ;               ^ punctuation.section.parens.end.fennel
 ;                 ^ punctuation.definition.comment
-;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 (-> [1 2 3 4 5] (table.unpack) ((pick-args 3 add))) ; => 6
 ; <- punctuation.section.parens.begin.fennel
 ;^^ entity.name.tag.fennel_threading_macros.fennel
@@ -453,7 +453,7 @@
 ;                                            ^^^ source.fennel
 ;                                               ^^^ punctuation.section.parens.end.fennel
 ;                                                   ^ punctuation.definition.comment
-;                                                    ^^^^^ comment.line.fennel
+;                                                    ^^^^^ comment.line.semicolon.fennel
 
 (local count-args (partial select "#"))
 ; <- punctuation.section.parens.begin.fennel
@@ -478,7 +478,7 @@
 ;                                                                   ^ punctuation.definition.string.end.fennel
 ;                                                                    ^ punctuation.section.parens.end.fennel
 ;                                                                      ^ punctuation.definition.comment
-;                                                                       ^^^^^ comment.line.fennel
+;                                                                       ^^^^^ comment.line.semicolon.fennel
 
 ; Binding
 ; let scoped locals
@@ -502,7 +502,7 @@
 ;             ^^ constant.numeric.integer.decimal.fennel
 ;               ^^ punctuation.section.parens.end.fennel
 ;                  ^ punctuation.definition.comment
-;                   ^^^^^^^ comment.line.fennel
+;                   ^^^^^^^ comment.line.semicolon.fennel
 
 ; These locals cannot be changed with set but they can be shadowed by an inner let or local. Outside the body of the let, the bindings it introduces are no longer visible.
 
@@ -532,7 +532,7 @@
 ;    ^^^^^ source.fennel
 ;         ^^ punctuation.section.parens.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^^ comment.line.fennel
+;             ^^^^^^ comment.line.semicolon.fennel
 ; Example:
 
 (let [{:msg message : val} (returns-a-table)]
@@ -576,7 +576,7 @@
 ;    ^^^^^ source.fennel
 ;         ^^ punctuation.section.parens.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^ comment.line.fennel
+;             ^^^^^ comment.line.semicolon.fennel
 
 ; When binding to a sequential table, you can capture all the remainder of the table in a local by using &:
 
@@ -606,7 +606,7 @@
 ;                   ^ punctuation.definition.string.end.fennel
 ;                    ^^ punctuation.section.parens.end.fennel
 ;                       ^ punctuation.definition.comment
-;                        ^^^^^^^^^^^^^ comment.line.fennel
+;                        ^^^^^^^^^^^^^ comment.line.semicolon.fennel
 ; with-open bind and auto-close file handles
 ; (Since 0.4.2)
 
@@ -653,7 +653,7 @@
 ;  ^^^^^^^^ variable.function.fennel
 ;          ^^ punctuation.section.parens.end.fennel
 ;             ^ punctuation.definition.comment
-;              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ;; This demonstrates that the file will also be closed upon error.
 (var fh nil)
@@ -689,7 +689,7 @@
 ;            ^^^ entity.name.tag.fennel_support.fennel
 ;                ^^^^^^^ source.fennel
 ;                         ^ punctuation.definition.comment
-;                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
             (error :whoops!))))
 ;           ^ punctuation.section.parens.begin.fennel
 ;            ^^^^^ entity.name.tag.lua_support.fennel
@@ -702,13 +702,13 @@
 ;        ^^ source.fennel
 ;          ^ punctuation.section.parens.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^^^^^^^^^^^^^ comment.line.fennel
+;             ^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 [ok err]     ; => [false "<error message and stacktrace>"]
 ; <- punctuation.section.brackets.begin.fennel
 ;^^^^^^ source.fennel
 ;      ^ punctuation.section.brackets.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; local declare local
 ; Introduces a new local inside an existing scope. Similar to let but without a body argument. Recommended for use at the top-level of a file for locals which will be used throughout the file.
@@ -846,7 +846,7 @@
 ;          ^ punctuation.definition.keyword.fennel
 ;           ^^ constant.other.keyword.fennel
 ;              ^ punctuation.definition.comment
-;               ^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;               ^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
    [x y z] :no ; because x=95 and x=52
 ;  ^ punctuation.section.brackets.begin.fennel
 ;   ^^^^^ source.fennel
@@ -854,7 +854,7 @@
 ;          ^ punctuation.definition.keyword.fennel
 ;           ^^ constant.other.keyword.fennel
 ;              ^ punctuation.definition.comment
-;               ^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;               ^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
    [a b x] :yes)) ; a and b are fresh values while x=95 and x=95
 ;  ^ punctuation.section.brackets.begin.fennel
 ;   ^^^^^ source.fennel
@@ -863,7 +863,7 @@
 ;           ^^^ constant.other.keyword.fennel
 ;              ^^ punctuation.section.parens.end.fennel
 ;                 ^ punctuation.definition.comment
-;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; There is a special case for _; it is never bound and always acts as a wildcard. If no clause matches, it returns nil.
 
@@ -915,7 +915,7 @@
 ;                                                    ^ source.fennel
 ;                                                     ^ punctuation.section.parens.end.fennel
 ;                                                       ^ punctuation.definition.comment
-;                                                        ^^^^^^ comment.line.fennel
+;                                                        ^^^^^^ comment.line.semicolon.fennel
 
 ; In this case the pattern should be wrapped in parens (like when matching against multiple values) but the second thing in the parens is the ? symbol. Each form following this marker is a condition; all the conditions must evaluate to true for that pattern to match.
 
@@ -998,7 +998,7 @@
 ;             ^ source.fennel
 ;              ^ punctuation.section.parens.end.fennel
 ;                ^ punctuation.definition.comment
-;                 ^^^^^^^^^^^^^^^ comment.line.fennel
+;                 ^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; Supports destructuring and multiple-value binding.
 
@@ -1030,7 +1030,7 @@
 ;                     ^^^ source.fennel
 ;                        ^ punctuation.section.parens.end.fennel
 ;                          ^ punctuation.definition.comment
-;                           ^^^^^^^^^^^ comment.line.fennel
+;                           ^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; You can provide multiple successive field names to perform nested sets.
 
@@ -1055,7 +1055,7 @@
 ; ^ source.fennel
 ;  ^ punctuation.section.parens.end.fennel
 ;    ^ punctuation.definition.comment
-;     ^^^^^ comment.line.fennel
+;     ^^^^^ comment.line.semicolon.fennel
 
 ; Example:
 
@@ -1077,7 +1077,7 @@
 ; ^^^^^^^ source.fennel
 ;        ^ punctuation.section.parens.end.fennel
 ;          ^ punctuation.definition.comment
-;           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; Example:
 
@@ -1101,7 +1101,7 @@
 ;                                             ^^^ source.fennel
 ;                                                ^ punctuation.section.braces.end.fennel
 ;                                                  ^ punctuation.definition.comment
-;                                                   ^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                                                   ^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; Example:
 
@@ -1132,7 +1132,7 @@
 ;                                             ^ source.fennel
 ;                                              ^ punctuation.section.parens.end.fennel
 ;                                                ^ punctuation.definition.comment
-;                                                 ^^^^^ comment.line.fennel
+;                                                 ^^^^^ comment.line.semicolon.fennel
 
 ; Flow Control
 ; if conditional
@@ -1322,7 +1322,7 @@
 ;                             ^ punctuation.definition.string.end.fennel
 ;                              ^ punctuation.section.parens.end.fennel
 ;                                ^ punctuation.definition.comment
-;                                 ^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                                 ^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; length string or table length
 ; (Changed in 0.3.0: the function was called # before.)
@@ -1351,7 +1351,7 @@
 ;                                     ^ punctuation.definition.string.end.fennel
 ;                                      ^^ punctuation.section.parens.end.fennel
 ;                                         ^ punctuation.definition.comment
-;                                          ^^^^^^^^^^ comment.line.fennel
+;                                          ^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; . table lookup
 ; Looks up a given key in a table. Multiple arguments will perform nested lookup.
@@ -1389,7 +1389,7 @@
 ;                             ^ constant.numeric.integer.decimal.fennel
 ;                              ^^ punctuation.section.parens.end.fennel
 ;                                 ^ punctuation.definition.comment
-;                                  ^^^^^ comment.line.fennel
+;                                  ^^^^^ comment.line.semicolon.fennel
 
 ; Note that if the field name is a string known at compile time, you don’t need this and can just use mytbl.field.
 
@@ -1600,14 +1600,14 @@
 ;         ^ constant.numeric.integer.decimal.fennel
 ;          ^ punctuation.section.parens.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^^^^^^^^ comment.line.fennel
+;             ^^^^^^^^^^^^ comment.line.semicolon.fennel
     (- 8)    ; (- (+ 52 91 2) 8)
 ;   ^ punctuation.section.parens.begin.fennel
 ;    ^ entity.name.tag.lua_support.fennel
 ;      ^ constant.numeric.integer.decimal.fennel
 ;       ^ punctuation.section.parens.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;             ^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
     (print "is the answer")) ; (print (- (+ 52 91 2) 8) "is the answer")
 ;   ^ punctuation.section.parens.begin.fennel
 ;    ^^^^^ entity.name.tag.lua_support.fennel
@@ -1616,7 +1616,7 @@
 ;                        ^ punctuation.definition.string.end.fennel
 ;                         ^^ punctuation.section.parens.end.fennel
 ;                            ^ punctuation.definition.comment
-;                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; The ->> macro works the same, except it splices it into the last position of each form instead of the first.
 
@@ -1657,7 +1657,7 @@
 ;        ^ constant.other.keyword.fennel
 ;         ^^ punctuation.section.parens.end.fennel
 ;            ^ punctuation.definition.comment
-;             ^^^^^^^ comment.line.fennel
+;             ^^^^^^^ comment.line.semicolon.fennel
 
 (-?>> :a
 ; <- punctuation.section.parens.begin.fennel
@@ -2066,7 +2066,7 @@
 ;                             ^^^^ punctuation.section.parens.end.fennel
 ; -> (if (> (+ abc 99) 0) (do (os.exit)))
 ; <- punctuation.definition.comment
-;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; Call the macrodebug macro with a form and it will repeatedly expand top-level macros in that form and print out the resulting form. Note that the resulting form will usually not be sensibly indented, so you might need to copy it and reformat it into something more readable.
 
@@ -2150,7 +2150,7 @@
 ;                  ^ constant.numeric.integer.decimal.fennel
 ;                   ^^ punctuation.section.parens.end.fennel
 ;                      ^ punctuation.definition.comment
-;                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; (Since 0.3.0) In order to prevent accidental symbol capture2, you may not bind a bare symbol inside a backtick as an identifier. Appending a # on the end of the identifier name as above invokes “auto gensym” which guarantees the local name is unique.
 
@@ -2198,7 +2198,7 @@
 ;                   ^^ punctuation.section.parens.end.fennel
 ; Compile error in 'x2' unknown:?: macro tried to bind x2 without gensym; try x2# instead
 ; <- punctuation.definition.comment
-;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.fennel
+;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; macros is useful for one-off, quick macros, or even some more complicated macros, but be careful. It may be tempting to try and use some function you have previously defined, but if you need such functionality, you should probably use import-macros.
 
