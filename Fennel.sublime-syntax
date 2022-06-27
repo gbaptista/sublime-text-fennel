@@ -254,7 +254,7 @@ contexts:
     # Explicitly matching \s also captures end-of-line; this allows apostrophe
     # pairing to work at the last cursor position in a comment line.
     - match: (;+|#!)(.|\s)*
-      scope: comment.line.fennel
+      scope: comment.line.semicolon.fennel
       captures:
         1: punctuation.definition.comment
     - match: ','
