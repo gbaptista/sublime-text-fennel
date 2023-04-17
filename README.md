@@ -30,7 +30,7 @@ Heavily tested against [Fennel 1.3.0](https://github.com/gbaptista/sublime-text-
 
 ## Completions
 
-One hundred ninety-four completions are available for _Fennel 1.1.0_ and _Lua 5.4.4_.
+One hundred ninety-nine completions are available for _Fennel 1.3.0_ and _Lua 5.4.4_.
 
 #### Fennel Completions
 
@@ -53,7 +53,7 @@ One hundred ninety-four completions are available for _Fennel 1.1.0_ and _Lua 5.
 
 ## References
 - [Fennel Language Website](https://fennel-lang.org)
-  - [Fennel 1.1.0 Reference](https://fennel-lang.org/reference)
+  - [Fennel 1.3.0 Reference](https://fennel-lang.org/reference)
 - [Lua Language Website](http://www.lua.org/)
   - [Lua 5.4 Reference Manual](https://www.lua.org/manual/5.4)
 
