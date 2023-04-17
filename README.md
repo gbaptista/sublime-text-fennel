@@ -2,7 +2,7 @@
 
 > _"Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system." [fennel-lang.org](https://fennel-lang.org)_
 
-Heavily tested against [Fennel 1.1.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_fennel_reference.fnl) and [Lua 5.4.4](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_lua.fnl) specifications.
+Heavily tested against [Fennel 1.3.0](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_fennel_reference.fnl) and [Lua 5.4.4](https://github.com/gbaptista/sublime-text-fennel/blob/master/tests/syntax_test_lua.fnl) specifications.
 
 ![Screenshot of a Fennel code highlighted.](https://raw.githubusercontent.com/gbaptista/sublime-text-fennel/master/screenshots/material-theme-darker/03.png)
 
