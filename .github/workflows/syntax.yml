@@ -25,8 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install lbzip2
-        run: sudo apt-get update && sudo apt-get install -y lbzip2
+      - name: Install bzip2
+        run: sudo apt-get update && sudo apt-get install -y bzip2
       - uses: SublimeText/syntax-test-action@v1
         with:
           build: ${{ matrix.build }}
