@@ -1,6 +1,6 @@
 ; SYNTAX TEST "Packages/Fennel/Fennel.sublime-syntax"
 
-; Fennel 1.1.0 on Lua 5.4.0
+; Fennel 1.3.0 on Lua 5.4.0
 
 ; These are all the special forms recognized by the Fennel compiler. It does not include built-in Lua functions; see the Lua reference manual or the Lua primer for that.
 
@@ -420,7 +420,7 @@
 ;                                        ^^^^^^^^^^^^^^^^^ comment.line.semicolon.fennel
 
 ; pick-args create a function of fixed arity
-; (Since 0.4.0)
+; (Since 0.4.0, deprecated 0.10.0)
 
 ; Like pick-values, but takes an integer n and a function/operator f, and creates a new function that applies exactly n arguments to f.
 
@@ -922,6 +922,8 @@
 ; (Note that Lua also has “patterns” which are matched against strings similar to how regular expressions work in other languages; these are two distinct concepts with similar names.)
 
 ; global set global variable
+; (Deprecated in 1.1.0)
+;
 ; Sets a global variable to a new value. Note that there is no distinction between introducing a new global and changing the value of an existing one.
 
 ; Example:
